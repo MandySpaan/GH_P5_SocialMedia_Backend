@@ -69,7 +69,6 @@ export const login = async (req, res) => {
     }
 
     const passwordVerified = bcrypt.compareSync(password, user.password);
-    console.log(1);
     if (!passwordVerified) {
       return res.status(400).json({
         success: false,
@@ -80,7 +79,7 @@ export const login = async (req, res) => {
     const token = jwt.sign(
       {
         _id: user._id,
-        roles: user.role,
+        role: user.role,
       },
 
       process.env.JWT_SECRET,

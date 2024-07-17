@@ -1,6 +1,6 @@
 export const isSuperAdmin = async (req, res, next) => {
   try {
-    if (req.tokenData.role_id !== "super_admin") {
+    if (req.tokenData.role !== "super_admin") {
       return res.json({
         success: false,
         message: "you are not allowed",
