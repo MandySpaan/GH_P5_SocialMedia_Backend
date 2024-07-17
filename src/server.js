@@ -17,7 +17,7 @@ app.get("/healthy", (req, res) => {
   });
 });
 
-app.use("/", router);
+app.use("/api", router);
 
 dbConnection()
   .then(() => {
