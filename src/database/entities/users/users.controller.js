@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import User from "./user.model.js";
 
 export const getAllUsers = async (req, res) => {
@@ -26,7 +27,7 @@ export const getUserProfile = async (req, res) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: "Your profile doesn't exist",
+        message: "Can't find your profile",
       });
     }
 
@@ -40,6 +41,50 @@ export const getUserProfile = async (req, res) => {
       susscess: false,
       message: "Profile can't be retrieved",
       error: error.message,
+    });
+  }
+};
+
+export const updateUser = async (req, res) => {
+  try {
+    const userIdToUpdate = req.tokenData.id;
+    const { first_name, last_name, email, password } = req.body;
+
+    let hashedPassword;
+
+    if (password) {
+      if (password.length < 8 || password.length > 15) {
+        return res.status(400).json({
+          success: false,
+          message: "The password has to be between 8 and 15 characters",
+        });
+      } else {
+        hashedPassword = bcrypt.hashSync(password, 10);
+      }
+    }
+
+    const userUpdated = await User.updateOne(
+      {
+        _id: userIdToUpdate,
+      },
+      {
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        password: hashedPassword,
+      }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User updated",
+      data: userUpdated,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error trying to update user",
+      error: error.message || error,
     });
   }
 };
