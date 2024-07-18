@@ -90,7 +90,7 @@ export const login = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "User logged",
+      message: "User logged in",
       data: token,
     });
   } catch (error) {
