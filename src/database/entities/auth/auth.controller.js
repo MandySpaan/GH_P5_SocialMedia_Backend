@@ -16,7 +16,7 @@ export const register = async (req, res) => {
     if (password.length < 8 || password.length > 12) {
       return res.status(400).json({
         success: false,
-        message: "Password is not valid, 8 to 12 characters must be needed",
+        message: "Password must be between 8 to 12 characters",
       });
     }
 
