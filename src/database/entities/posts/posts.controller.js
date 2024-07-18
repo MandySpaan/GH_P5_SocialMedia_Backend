@@ -122,28 +122,55 @@ export const updatePostById = async (req, res) => {
 
 export const getOwnPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
+    const userId = req.tokenData.id;
 
-    const userPosts = posts.filter(
-      (post) => post.user_id.toString() === req.tokenData.id
-    );
+    const posts = await Post.find({ user_id: userId });
 
-    if (userPosts.length === 0) {
+    if (posts.length === 0) {
       return res.status(404).json({
         success: false,
-        message: "You have no posts yet",
+        message: "You haven't created any posts yet",
       });
     }
 
     res.status(200).json({
       success: true,
-      message: "Your posts retrieved successfully",
-      data: userPosts,
+      message: "Your posts retrieved",
+      data: posts,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error getting own posts",
+      message: "Can't retrieve your posts",
+      error: error.message,
+    });
+  }
+};
+
+export const getALLPosts = async (req, res) => {
+  try {
+    const posts = await Post.find().populate({
+      path: "user_id",
+      select: "first_name last_name",
+    });
+
+    if (posts.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No posts found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Posts retrieved",
+      data: posts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Posts can't be retrieved",
+      error: error.message,
     });
   }
 };
