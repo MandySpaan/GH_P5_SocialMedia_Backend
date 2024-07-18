@@ -21,7 +21,7 @@ export const auth = (req, res, next) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error authenticadd",
+      message: "Error authentication",
       error: error,
     });
   }

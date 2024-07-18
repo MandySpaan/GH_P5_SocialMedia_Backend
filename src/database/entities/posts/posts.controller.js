@@ -119,3 +119,31 @@ export const updatePostById = async (req, res) => {
     });
   }
 };
+
+export const getOwnPosts = async (req, res) => {
+  try {
+    const posts = await Post.find();
+
+    const userPosts = posts.filter(
+      (post) => post.user_id.toString() === req.tokenData.id
+    );
+
+    if (userPosts.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "You have no posts yet",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Your posts retrieved successfully",
+      data: userPosts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error getting own posts",
+    });
+  }
+};
