@@ -174,3 +174,33 @@ export const getALLPosts = async (req, res) => {
     });
   }
 };
+
+export const getPostById = async (req, res) => {
+  try {
+    const postId = req.params.id;
+
+    const post = await Post.findById(postId).populate({
+      path: "user_id",
+      select: "-password ",
+    });
+
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "Post not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Post retrieved successfully",
+      data: post,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error retrieving post",
+      error: error.message,
+    });
+  }
+};
