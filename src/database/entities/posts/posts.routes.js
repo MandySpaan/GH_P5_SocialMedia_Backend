@@ -6,6 +6,7 @@ import {
   getALLPosts,
   getOwnPosts,
   getPostById,
+  getPostsByUserId,
   updatePostById,
 } from "./posts.controller.js";
 
@@ -16,6 +17,7 @@ router.delete("/:id", auth, deletePostById);
 router.put("/:id", auth, updatePostById);
 router.get("/own", auth, getOwnPosts);
 router.get("/", getALLPosts);
+router.get("/user/:id", getPostsByUserId);
 router.get("/:id", getPostById);
 
 export { router };

@@ -204,3 +204,29 @@ export const getPostById = async (req, res) => {
     });
   }
 };
+
+export const getPostsByUserId = async (req, res) => {
+  try {
+    const Id = req.params.id;
+
+    const posts = await Post.find({ user_id: Id });
+
+    if (posts.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No posts by this user",
+      });
+    }
+
+    res.status(201).json({
+      success: true,
+      message: "Post(s) found",
+      data: posts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error finding post by id",
+    });
+  }
+};
