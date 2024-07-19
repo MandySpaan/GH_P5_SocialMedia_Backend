@@ -7,6 +7,7 @@ import {
   getOwnPosts,
   getPostById,
   getPostsByUserId,
+  likePostById,
   updatePostById,
 } from "./posts.controller.js";
 
@@ -19,5 +20,6 @@ router.get("/own", auth, getOwnPosts);
 router.get("/", getALLPosts);
 router.get("/user/:id", getPostsByUserId);
 router.get("/:id", getPostById);
+router.put("/like/:id", likePostById);
 
 export { router };
