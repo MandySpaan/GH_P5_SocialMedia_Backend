@@ -6,7 +6,7 @@ import User from "../entities/users/user.model.js";
 
 dotenv.config();
 
-const postSeeder = async () => {
+export const postSeeder = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI, {});
 
@@ -32,5 +32,3 @@ const postSeeder = async () => {
     await mongoose.connection.close();
   }
 };
-
-postSeeder();
