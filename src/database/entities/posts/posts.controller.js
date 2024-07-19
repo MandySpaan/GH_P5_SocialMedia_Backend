@@ -7,8 +7,6 @@ export const createPost = async (req, res) => {
     const description = req.body.description;
     const userId = req.tokenData.id;
 
-    console.log(`userId from createPost ${userId}`);
-
     const newPost = await Post.create({
       title: title,
       description: description,
@@ -38,8 +36,6 @@ export const deletePostById = async (req, res) => {
   try {
     const userId = req.tokenData.id;
 
-    console.log(`userId from deletePost ${userId}`);
-
     const postIdToDelete = req.params.id;
     const postIdToDeleteIsValid = Types.ObjectId.isValid(postIdToDelete);
     if (!postIdToDeleteIsValid) {
@@ -49,11 +45,6 @@ export const deletePostById = async (req, res) => {
       });
     }
     const post = await Post.findById(postIdToDelete);
-
-    console.log(post.user_id.toString());
-    console.log("=================");
-    console.log(userId);
-    console.log("=================");
 
     if (post.user_id.toString() !== req.tokenData.id) {
       return res.status(403).json({
