@@ -7,6 +7,8 @@ export const createPost = async (req, res) => {
     const description = req.body.description;
     const userId = req.tokenData.id;
 
+    console.log(userId);
+
     const newPost = await Post.create({
       title: title,
       description: description,
@@ -227,7 +229,7 @@ export const likePostById = async (req, res) => {
     const userId = req.tokenData.id;
     const postId = req.params.id;
 
-    console.log(req.tokenData.id);
+    console.log(userId);
 
     const post = await Post.findById(postId);
 

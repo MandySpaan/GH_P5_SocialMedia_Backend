@@ -15,11 +15,11 @@ const router = Router();
 
 router.post("/", auth, createPost);
 router.delete("/:id", auth, deletePostById);
+router.put("/like/:id", auth, likePostById);
 router.put("/:id", auth, updatePostById);
 router.get("/own", auth, getOwnPosts);
 router.get("/", getALLPosts);
 router.get("/user/:id", getPostsByUserId);
 router.get("/:id", getPostById);
-router.put("/like/:id", likePostById);
 
 export { router };
