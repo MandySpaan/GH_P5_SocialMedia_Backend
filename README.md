@@ -78,13 +78,7 @@ npm install
    change the name to .env </br>
    and fill in all the fields
 
-5. Run the migrations to create the tables
-
-```sh
-npm run migrations
-```
-
-6. Plant the seeds into the tables
+5. Plant the seeds into the tables
 
 ```sh
 npm run db:seed
@@ -96,12 +90,6 @@ To run the server:
 
 ```sh
 npm run dev
-```
-
-To refresh and go back to the starting point:
-
-```sh
-$ npm run db:refresh
 ```
 
 ## Endpoints ⚙️
