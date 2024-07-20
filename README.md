@@ -110,18 +110,41 @@ $ npm run db:refresh
 
 <details>
 <summary>Authentication</summary>
-To be added
+
+| Method |        URI         |            Action             |             Auth              |                                 Body                                  |
+| :----: | :----------------: | :---------------------------: | :---------------------------: | :-------------------------------------------------------------------: |
+|  POST  | /api/auth/register |      Register a new user      | <center>N/A (public)</center> | `{ "email": "youremail@email.com",`<br>`"password": "yourPassword" }` |
+|  POST  |  /api/auth/login   | Login a user and return a JWT | <center>N/A (public)</center> | `{ "email": "youremail@email.com",`<br>`"password": "yourPassword" }` |
+
 </details>
 
 <details>
 <summary>Users</summary>
-To be added
+
+| Method |          URI           |            Action            |             Auth              |                                                              Body                                                              |
+| :----: | :--------------------: | :--------------------------: | :---------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
+|  GET   |       /api/users       |        View all users        |     Token (isSuperAdmin)      |                                                      <center>N/A</center>                                                      |
+|  GET   |   /api/users/profile   |  View your own user profile  |         Token (user)          |                                                      <center>N/A</center>                                                      |
+|  GET   | /api/users/profile/:id | View user profile by user id | <center>N/A (public)</center> |                                                      <center>N/A</center>                                                      |
+|  PUT   |   /api/users/profile   |     Update user profile      |         Token (user)          | `{ "first_name": "newFirstName",`<br>`"last_name": "newLastName",`<br>` "email": "newEmail",`<br>`"password": "newPassword" }` |
 
 </details>
 
 <details>
 <summary>Posts</summary>
-To be added
+
+| Method |         URI          |             Action              |          Permissions          |                                 Body                                  |
+| :----: | :------------------: | :-----------------------------: | :---------------------------: | :-------------------------------------------------------------------: |
+|  POST  |      /api/posts      |           Create post           |         Token (user)          |    `{ "title": "postTitle",`<br>`"description": postDescription }`    |
+| DELETE | /api/posts/admin/:id |     Delete post by post id      |     Token (isSuperAdmin)      |                         <center>N/A</center>                          |
+| DELETE |    /api/posts/:id    | Delete your own post by post id |         Token (user)          |                         <center>N/A</center>                          |
+|  PUT   | /api/posts/like/:id  |      Like post by post id       |         Token (user)          |                         <center>N/A</center>                          |
+|  PUT   |    /api/posts/:id    | Update your own post by post id |         Token (user)          | `{ "title": "newPostTitle",`<br>`"description": newPostDescription }` |
+|  GET   |    /api/posts/own    |       View your own posts       |         Token (user)          |                         <center>N/A</center>                          |
+|  GET   |     /api/posts/      |         View all posts          | <center>N/A (public)</center> |                         <center>N/A</center>                          |
+|  GET   | /api/posts/user/:id  |      View post by user id       | <center>N/A (public)</center> |                         <center>N/A</center>                          |
+|  GET   |    /api/posts/:id    |      View post by post id       | <center>N/A (public)</center> |                         <center>N/A</center>                          |
+
 </details>
 
 ## Points of Improvement 💡
