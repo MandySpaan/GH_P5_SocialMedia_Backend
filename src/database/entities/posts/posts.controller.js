@@ -3,11 +3,8 @@ import Post from "./post.model.js";
 
 export const createPost = async (req, res) => {
   try {
-    const title = req.body.title;
-    const description = req.body.description;
+    const { title, description } = req.body;
     const userId = req.tokenData.id;
-
-    console.log(userId);
 
     const newPost = await Post.create({
       title: title,
@@ -28,7 +25,7 @@ export const createPost = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "error creating new post",
+      message: "Error trying to create new post",
       error: error.message,
     });
   }
@@ -37,8 +34,8 @@ export const createPost = async (req, res) => {
 export const deletePostById = async (req, res) => {
   try {
     const userId = req.tokenData.id;
-
     const postIdToDelete = req.params.id;
+
     const postIdToDeleteIsValid = Types.ObjectId.isValid(postIdToDelete);
     if (!postIdToDeleteIsValid) {
       return res.status(400).json({
@@ -48,19 +45,42 @@ export const deletePostById = async (req, res) => {
     }
     const post = await Post.findById(postIdToDelete);
 
-    if (post.user_id.toString() !== req.tokenData.id) {
+    if (post.user_id.toString() !== userId) {
       return res.status(403).json({
         success: false,
-        message: "You are not authorized to delete this post",
+        message: "You can only delete your own posts",
       });
     }
-    const deletedPost = await Post.findByIdAndDelete(postIdToDelete);
-    if (!deletedPost) {
-      return res.status(404).json({
-        succes: false,
-        message: "Post not found",
+
+    await Post.findByIdAndDelete(postIdToDelete);
+
+    res.status(200).json({
+      success: true,
+      message: "Post deleted",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error trying to delete post",
+      error: error.message,
+    });
+  }
+};
+
+export const deletePostByIdAdmin = async (req, res) => {
+  try {
+    const postIdToDelete = req.params.id;
+
+    const postIdToDeleteIsValid = Types.ObjectId.isValid(postIdToDelete);
+    if (!postIdToDeleteIsValid) {
+      return res.status(400).json({
+        success: false,
+        message: "Post id not valid",
       });
     }
+
+    await Post.findByIdAndDelete(postIdToDelete);
+
     res.status(200).json({
       success: true,
       message: "Post deleted",

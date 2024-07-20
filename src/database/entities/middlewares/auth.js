@@ -4,7 +4,7 @@ export const auth = (req, res, next) => {
   try {
     if (!req.headers.authorization) {
       return res.status(401).json({
-        suucess: false,
+        success: false,
         message: "Unauthorized",
       });
     }
@@ -21,8 +21,8 @@ export const auth = (req, res, next) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error authentication",
-      error: error,
+      message: "Authentication error",
+      error: error.message,
     });
   }
 };

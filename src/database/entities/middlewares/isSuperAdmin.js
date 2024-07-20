@@ -3,7 +3,7 @@ export const isSuperAdmin = async (req, res, next) => {
     if (req.tokenData.role !== "super_admin") {
       return res.json({
         success: false,
-        message: "you are not allowed",
+        message: "You're not authorized to do this",
       });
     }
 
@@ -11,7 +11,7 @@ export const isSuperAdmin = async (req, res, next) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "ERROR",
+      message: "Super admin authentication error",
       error: error.message,
     });
   }

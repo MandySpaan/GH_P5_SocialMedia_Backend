@@ -9,6 +9,4 @@ router.use("/auth", authRoutes);
 router.use("/users", userRoutes);
 router.use("/posts", postRoutes);
 
-console.log();
-
 export { router };

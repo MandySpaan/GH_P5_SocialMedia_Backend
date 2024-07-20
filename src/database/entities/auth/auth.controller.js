@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
-import User from "../users/user.model.js";
 import jwt from "jsonwebtoken";
+import User from "../users/user.model.js";
 
 export const register = async (req, res) => {
   try {
@@ -9,14 +9,14 @@ export const register = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        message: " Email and password are required ",
+        message: "Email and password are required ",
       });
     }
 
     if (password.length < 8 || password.length > 12) {
       return res.status(400).json({
         success: false,
-        message: "Password must be between 8 to 12 characters",
+        message: "Password must be between 8 and 12 characters",
       });
     }
 
@@ -40,7 +40,7 @@ export const register = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: " Error registering user",
+      message: " Error trying to register user",
       error: error.message,
     });
   }
@@ -64,7 +64,7 @@ export const login = async (req, res) => {
     if (!user) {
       return res.status(400).json({
         success: false,
-        message: "email or password are invalid",
+        message: "Unknown email address",
       });
     }
 
@@ -72,7 +72,7 @@ export const login = async (req, res) => {
     if (!passwordVerified) {
       return res.status(400).json({
         success: false,
-        message: "email or password are invalid",
+        message: "The password you entered is incorrect",
       });
     }
 
@@ -96,7 +96,7 @@ export const login = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error loggin user",
+      message: "Error trying to log in",
       error: error,
     });
   }

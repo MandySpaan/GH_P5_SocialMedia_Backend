@@ -6,7 +6,7 @@ export const getAllUsers = async (req, res) => {
     const users = await User.find().select("-password");
     res.status(200).json({
       success: true,
-      message: "Users retrieved",
+      message: "All users retrieved",
       data: users,
     });
   } catch (error) {
@@ -18,12 +18,11 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-export const getUserProfile = async (req, res) => {
+export const getOwnProfile = async (req, res) => {
   try {
     const userId = req.tokenData.id;
     const user = await User.findOne({ _id: userId }).select("-password");
 
-    console.log(userId);
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -39,7 +38,33 @@ export const getUserProfile = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       susscess: false,
-      message: "Profile can't be retrieved",
+      message: "Error trying to retrieve your profile",
+      error: error.message,
+    });
+  }
+};
+
+export const getUserProfileById = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findOne({ _id: userId }).select("-password");
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Can't find the profile",
+      });
+    }
+
+    return res.status(201).json({
+      success: true,
+      message: "The profile is retrieved successfully",
+      data: user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      susscess: false,
+      message: "Error trying to retrieve your profile",
       error: error.message,
     });
   }
@@ -84,7 +109,7 @@ export const updateUser = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error trying to update user",
-      error: error.message || error,
+      error: error.message,
     });
   }
 };
