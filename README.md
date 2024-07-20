@@ -48,11 +48,9 @@ Deploy via Zeabur: [ghsocialmedia.zeabur.app](https://ghsocialmedia.zeabur.app/)
 
 ## Database Diagram 📊
 
-To be added
+This diagram shows the structure of the database tables.
 
-<!-- This diagram shows the structure of the database tables. -->
-
-<!-- ![Database Diagram](./img/db-diagram.png) -->
+![Database Diagram](./img/diagram-social-media.jpeg)
 
 ## How to Use ⚙️
 
