@@ -96,27 +96,28 @@ export const deletePostByIdAdmin = async (req, res) => {
 
 export const updatePostById = async (req, res) => {
   try {
-    const Id = req.params.id;
+    const postId = req.params.id;
+    const userId = req.tokenData.id;
     const { title, description } = req.body;
 
-    const post = await Post.findOne({ _id: Id });
+    const post = await Post.findOne({ _id: postId });
 
     if (!post) {
       return res.status(404).json({
         success: false,
-        message: "Post does not exist",
+        message: "Post not found",
       });
     }
 
-    if (post.user_id.toString() !== req.tokenData.id) {
+    if (post.user_id.toString() !== userId) {
       return res.status(403).json({
         success: false,
-        message: "You are not authorized to delete this post",
+        message: "You can only update your own posts",
       });
     }
 
     const updatedPost = await Post.updateOne(
-      { _id: Id },
+      { _id: postId },
       { title: title, description: description }
     );
 
@@ -128,7 +129,7 @@ export const updatePostById = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error updating post",
+      message: "Error trying to update post",
     });
   }
 };
@@ -154,13 +155,13 @@ export const getOwnPosts = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Can't retrieve your posts",
+      message: "Error trying to retrieve your posts",
       error: error.message,
     });
   }
 };
 
-export const getALLPosts = async (req, res) => {
+export const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find().populate({
       path: "user_id",
@@ -176,13 +177,13 @@ export const getALLPosts = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Posts retrieved",
+      message: "All posts retrieved",
       data: posts,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Posts can't be retrieved",
+      message: "Error trying to retrieve all posts",
       error: error.message,
     });
   }
@@ -212,7 +213,7 @@ export const getPostById = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error retrieving post",
+      message: "Error trying to retrieve post",
       error: error.message,
     });
   }
@@ -220,9 +221,9 @@ export const getPostById = async (req, res) => {
 
 export const getPostsByUserId = async (req, res) => {
   try {
-    const Id = req.params.id;
+    const userId = req.params.id;
 
-    const posts = await Post.find({ user_id: Id });
+    const posts = await Post.find({ user_id: userId });
 
     if (posts.length === 0) {
       return res.status(404).json({
@@ -239,7 +240,7 @@ export const getPostsByUserId = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error finding post by id",
+      message: "Error trying to find post by id",
     });
   }
 };

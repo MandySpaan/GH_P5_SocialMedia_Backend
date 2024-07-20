@@ -4,7 +4,7 @@ import {
   createPost,
   deletePostById,
   deletePostByIdAdmin,
-  getALLPosts,
+  getAllPosts,
   getOwnPosts,
   getPostById,
   getPostsByUserId,
@@ -21,7 +21,7 @@ router.delete("/:id", auth, deletePostById);
 router.put("/like/:id", auth, likePostById);
 router.put("/:id", auth, updatePostById);
 router.get("/own", auth, getOwnPosts);
-router.get("/", getALLPosts);
+router.get("/", getAllPosts);
 router.get("/user/:id", getPostsByUserId);
 router.get("/:id", getPostById);
 
