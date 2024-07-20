@@ -119,17 +119,17 @@ npm run dev
 <details>
 <summary>Posts</summary>
 
-| Method |         URI          |             Action              |          Permissions          |                                 Body                                  |
-| :----: | :------------------: | :-----------------------------: | :---------------------------: | :-------------------------------------------------------------------: |
-|  POST  |      /api/posts      |           Create post           |         Token (user)          |    `{ "title": "postTitle",`<br>`"description": postDescription }`    |
-| DELETE | /api/posts/admin/:id |     Delete post by post id      |     Token (isSuperAdmin)      |                         <center>N/A</center>                          |
-| DELETE |    /api/posts/:id    | Delete your own post by post id |         Token (user)          |                         <center>N/A</center>                          |
-|  PUT   | /api/posts/like/:id  |      Like post by post id       |         Token (user)          |                         <center>N/A</center>                          |
-|  PUT   |    /api/posts/:id    | Update your own post by post id |         Token (user)          | `{ "title": "newPostTitle",`<br>`"description": newPostDescription }` |
-|  GET   |    /api/posts/own    |       View your own posts       |         Token (user)          |                         <center>N/A</center>                          |
-|  GET   |     /api/posts/      |         View all posts          | <center>N/A (public)</center> |                         <center>N/A</center>                          |
-|  GET   | /api/posts/user/:id  |      View post by user id       | <center>N/A (public)</center> |                         <center>N/A</center>                          |
-|  GET   |    /api/posts/:id    |      View post by post id       | <center>N/A (public)</center> |                         <center>N/A</center>                          |
+| Method |         URI          |             Action              |          Permissions          |                                  Body                                   |
+| :----: | :------------------: | :-----------------------------: | :---------------------------: | :---------------------------------------------------------------------: |
+|  POST  |      /api/posts      |           Create post           |         Token (user)          |    `{ "title": "postTitle",`<br>`"description": "postDescription" }`    |
+| DELETE | /api/posts/admin/:id |     Delete post by post id      |     Token (isSuperAdmin)      |                          <center>N/A</center>                           |
+| DELETE |    /api/posts/:id    | Delete your own post by post id |         Token (user)          |                          <center>N/A</center>                           |
+|  PUT   | /api/posts/like/:id  |      Like post by post id       |         Token (user)          |                          <center>N/A</center>                           |
+|  PUT   |    /api/posts/:id    | Update your own post by post id |         Token (user)          | `{ "title": "newPostTitle",`<br>`"description": "newPostDescription" }` |
+|  GET   |    /api/posts/own    |       View your own posts       |         Token (user)          |                          <center>N/A</center>                           |
+|  GET   |     /api/posts/      |         View all posts          | <center>N/A (public)</center> |                          <center>N/A</center>                           |
+|  GET   | /api/posts/user/:id  |      View post by user id       | <center>N/A (public)</center> |                          <center>N/A</center>                           |
+|  GET   |    /api/posts/:id    |      View post by post id       | <center>N/A (public)</center> |                          <center>N/A</center>                           |
 
 </details>
 
