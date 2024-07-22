@@ -250,8 +250,6 @@ export const likePostById = async (req, res) => {
     const userId = req.tokenData.id;
     const postId = req.params.id;
 
-    console.log(userId);
-
     const post = await Post.findById(postId);
 
     if (!post) {
