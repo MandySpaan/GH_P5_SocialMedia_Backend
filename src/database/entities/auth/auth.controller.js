@@ -4,12 +4,12 @@ import User from "../users/user.model.js";
 
 export const register = async (req, res) => {
   try {
-    const { first_name, last_name, email, password } = req.body;
+    const { username, email, password } = req.body;
 
-    if (!email || !password) {
+    if (!username | !email || !password) {
       return res.status(400).json({
         success: false,
-        message: "Email and password are required ",
+        message: "Username, email and password are required ",
       });
     }
 
@@ -26,8 +26,7 @@ export const register = async (req, res) => {
     );
 
     const newUser = await User.create({
-      first_name: first_name,
-      last_name: last_name,
+      username: username,
       email: email,
       password: hashedPassword,
     });

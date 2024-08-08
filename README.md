@@ -97,10 +97,10 @@ npm run dev
 <details>
 <summary>Authentication</summary>
 
-| Method |        URI         |            Action             |             Auth              |                                 Body                                  |
-| :----: | :----------------: | :---------------------------: | :---------------------------: | :-------------------------------------------------------------------: |
-|  POST  | /api/auth/register |      Register a new user      | <center>N/A (public)</center> | `{ "email": "youremail@email.com",`<br>`"password": "yourPassword" }` |
-|  POST  |  /api/auth/login   | Login a user and return a JWT | <center>N/A (public)</center> | `{ "email": "youremail@email.com",`<br>`"password": "yourPassword" }` |
+| Method |        URI         |            Action             |             Auth              |                                               Body                                                |
+| :----: | :----------------: | :---------------------------: | :---------------------------: | :-----------------------------------------------------------------------------------------------: |
+|  POST  | /api/auth/register |      Register a new user      | <center>N/A (public)</center> | `{ "username": "yourUsername", "email": "youremail@email.com",`<br>`"password": "yourPassword" }` |
+|  POST  |  /api/auth/login   | Login a user and return a JWT | <center>N/A (public)</center> |               `{ "email": "youremail@email.com",`<br>`"password": "yourPassword" }`               |
 
 </details>
 
