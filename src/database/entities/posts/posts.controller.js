@@ -141,9 +141,10 @@ export const getOwnPosts = async (req, res) => {
     const posts = await Post.find({ user_id: userId });
 
     if (posts.length === 0) {
-      return res.status(404).json({
-        success: false,
+      return res.status(200).json({
+        success: true,
         message: "You haven't created any posts yet",
+        data: [],
       });
     }
 
