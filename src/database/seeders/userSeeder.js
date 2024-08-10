@@ -34,6 +34,8 @@ export const userSeeder = async () => {
         first_name: "Nikoleta",
         last_name: "Freidenfulde",
         username: "nikoletalulu",
+        description:
+          "Dedicated to pushing the boundaries of engineering with cutting-edge technology and creative problem-solving. Always exploring new methodologies and tools.",
         email: "lulu@lulu.com",
         password: bcrypt.hashSync(
           "password03",
@@ -45,6 +47,8 @@ export const userSeeder = async () => {
         first_name: "José",
         last_name: "KnoWay",
         username: "djknoway",
+        description:
+          "Focused on crafting innovative software solutions that solve real-world problems. My expertise spans multiple programming languages and frameworks.",
         email: "knoway@knoway.com",
         password: bcrypt.hashSync(
           "password04",
@@ -57,6 +61,8 @@ export const userSeeder = async () => {
         last_name: "Rico",
         email: "rico@rico.com",
         username: "masr1co",
+        description:
+          "Passionate about everything from coding languages to emerging tech trends. Always on the lookout for the next big thing in technology.",
         password: bcrypt.hashSync(
           "password05",
           parseInt(process.env.SALT_ROUNDS)

@@ -73,7 +73,8 @@ export const getUserProfileById = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const userIdToUpdate = req.tokenData.id;
-    const { first_name, last_name, email, password } = req.body;
+    const { username, description, first_name, last_name, email, password } =
+      req.body;
 
     let hashedPassword;
 
@@ -93,6 +94,8 @@ export const updateUser = async (req, res) => {
         _id: userIdToUpdate,
       },
       {
+        username: username,
+        description: description,
         first_name: first_name,
         last_name: last_name,
         email: email,

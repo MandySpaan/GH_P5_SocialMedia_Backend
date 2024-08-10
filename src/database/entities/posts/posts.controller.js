@@ -166,7 +166,7 @@ export const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find().populate({
       path: "user_id",
-      select: "first_name last_name",
+      select: "username",
     });
 
     if (posts.length === 0) {
