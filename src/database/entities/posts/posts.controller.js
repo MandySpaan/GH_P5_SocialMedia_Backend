@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
 import Post from "./post.model.js";
+import User from "../users/user.model.js";
 
 export const createPost = async (req, res) => {
   try {
@@ -206,10 +207,24 @@ export const getPostById = async (req, res) => {
       });
     }
 
+    const likes = post.likes;
+
+    const likedby = await Promise.all(
+      likes.map(async (userId) => {
+        const user = await User.findById(userId).select("username");
+        return user ? user.username : null;
+      })
+    );
+
+    const postWithUsernames = {
+      ...post._doc,
+      likedby,
+    };
+
     res.status(200).json({
       success: true,
       message: "Post retrieved successfully",
-      data: post,
+      data: postWithUsernames,
     });
   } catch (error) {
     res.status(500).json({
