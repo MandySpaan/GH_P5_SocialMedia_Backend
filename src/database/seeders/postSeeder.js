@@ -14,7 +14,7 @@ export const postSeeder = async () => {
     const userIDs = users.map((user) => user._id);
 
     const posts = [];
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 40; i++) {
       posts.push({
         title: faker.lorem.sentence(),
         description: faker.lorem.paragraph(),

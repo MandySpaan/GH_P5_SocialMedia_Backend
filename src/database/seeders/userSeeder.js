@@ -32,13 +32,26 @@ export const userSeeder = async () => {
       },
       {
         first_name: "Nikoleta",
-        last_name: "Freidenfulde",
+        last_name: "Freidenfelde",
         username: "nikoletalulu",
         description:
           "Dedicated to pushing the boundaries of engineering with cutting-edge technology and creative problem-solving. Always exploring new methodologies and tools.",
         email: "lulu@lulu.com",
         password: bcrypt.hashSync(
           "password03",
+          parseInt(process.env.SALT_ROUNDS)
+        ),
+        role: "user",
+      },
+      {
+        first_name: "Shanna",
+        last_name: "Linnenbank",
+        username: "shannapascale",
+        description:
+          "Deeply interested in the potential of artificial intelligence and machine learning. I explore ways these technologies can be leveraged for innovative applications.",
+        email: "shanna@shanna.com",
+        password: bcrypt.hashSync(
+          "password04",
           parseInt(process.env.SALT_ROUNDS)
         ),
         role: "user",
@@ -51,7 +64,20 @@ export const userSeeder = async () => {
           "Focused on crafting innovative software solutions that solve real-world problems. My expertise spans multiple programming languages and frameworks.",
         email: "knoway@knoway.com",
         password: bcrypt.hashSync(
-          "password04",
+          "password05",
+          parseInt(process.env.SALT_ROUNDS)
+        ),
+        role: "user",
+      },
+      {
+        first_name: "Lili",
+        last_name: "Rangel Marquez",
+        email: "lili@lili.com",
+        username: "lilinda",
+        description:
+          "Passionate about everything from coding languages to emerging tech trends. Always on the lookout for the next big thing in technology.",
+        password: bcrypt.hashSync(
+          "password06",
           parseInt(process.env.SALT_ROUNDS)
         ),
         role: "user",
@@ -64,7 +90,7 @@ export const userSeeder = async () => {
         description:
           "Passionate about everything from coding languages to emerging tech trends. Always on the lookout for the next big thing in technology.",
         password: bcrypt.hashSync(
-          "password05",
+          "password07",
           parseInt(process.env.SALT_ROUNDS)
         ),
         role: "user",
