@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
+import Post from "../posts/post.model.js";
 
-const UserShema = new Schema(
+const UserSchema = new Schema(
   {
     username: {
       type: String,
@@ -47,6 +48,19 @@ const UserShema = new Schema(
   }
 );
 
-const User = model("User", UserShema);
+UserSchema.pre(
+  "deleteOne",
+  { document: true, query: false },
+  async function (next) {
+    try {
+      await Post.deleteMany({ user_id: this._id });
+      next();
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+const User = model("User", UserSchema);
 
 export default User;

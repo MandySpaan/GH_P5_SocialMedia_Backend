@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import User from "./user.model.js";
+import { Types } from "mongoose";
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -13,6 +14,35 @@ export const getAllUsers = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Users can't be retrieved",
+      error: error.message,
+    });
+  }
+};
+
+export const deleteUserByIdAdmin = async (req, res) => {
+  try {
+    const userIdToDelete = req.params.id;
+
+    const userIdToDeleteIsValid = Types.ObjectId.isValid(userIdToDelete);
+    if (!userIdToDeleteIsValid) {
+      return res.status(400).json({
+        success: false,
+        message: "User id not valid",
+      });
+    }
+
+    const user = await User.findById(userIdToDelete);
+
+    await user.deleteOne();
+
+    res.status(200).json({
+      success: true,
+      message: "User deleted",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error trying to delete user",
       error: error.message,
     });
   }
