@@ -18,6 +18,7 @@ export const userSeeder = async () => {
           parseInt(process.env.SALT_ROUNDS)
         ),
         role: "super_admin",
+        following: [],
       },
       {
         first_name: "Mandy",
@@ -29,6 +30,7 @@ export const userSeeder = async () => {
           parseInt(process.env.SALT_ROUNDS)
         ),
         role: "super_admin",
+        following: [],
       },
       {
         first_name: "Nikoleta",
@@ -42,6 +44,7 @@ export const userSeeder = async () => {
           parseInt(process.env.SALT_ROUNDS)
         ),
         role: "user",
+        following: [],
       },
       {
         first_name: "Shanna",
@@ -55,6 +58,7 @@ export const userSeeder = async () => {
           parseInt(process.env.SALT_ROUNDS)
         ),
         role: "user",
+        following: [],
       },
       {
         first_name: "José",
@@ -68,6 +72,7 @@ export const userSeeder = async () => {
           parseInt(process.env.SALT_ROUNDS)
         ),
         role: "user",
+        following: [],
       },
       {
         first_name: "Lili",
@@ -81,6 +86,7 @@ export const userSeeder = async () => {
           parseInt(process.env.SALT_ROUNDS)
         ),
         role: "user",
+        following: [],
       },
       {
         first_name: "Mattia",
@@ -94,6 +100,7 @@ export const userSeeder = async () => {
           parseInt(process.env.SALT_ROUNDS)
         ),
         role: "user",
+        following: [],
       },
     ];
     await User.insertMany(users);

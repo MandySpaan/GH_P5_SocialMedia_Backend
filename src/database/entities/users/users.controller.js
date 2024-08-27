@@ -164,9 +164,9 @@ export const followUserById = async (req, res) => {
     const hasFollow = followUser.following.includes(ownUserId);
 
     if (hasFollow) {
-      post.likes.pull(userIdToFollow);
+      followUser.following.pull(userIdToFollow);
     } else {
-      post.likes.push(userIdToFollow);
+      followUser.following.push(userIdToFollow);
     }
 
     await followUser.save();
