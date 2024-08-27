@@ -42,6 +42,13 @@ const UserSchema = new Schema(
       Enum: ["user", "admin", "super_admin"],
       default: "user",
     },
+
+    following: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     timestamps: true,
