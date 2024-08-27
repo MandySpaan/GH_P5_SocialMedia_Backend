@@ -146,3 +146,45 @@ export const updateUser = async (req, res) => {
     });
   }
 };
+
+export const followUserById = async (req, res) => {
+  try {
+    const ownUserId = req.tokenData.id;
+    const userIdToFollow = req.params.id;
+
+    const followUser = await User.findById(userIdToFollow);
+
+    if (!followUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const hasFollow = followUser.following.includes(ownUserId);
+
+    if (hasFollow) {
+      post.likes.pull(userIdToFollow);
+    } else {
+      post.likes.push(userIdToFollow);
+    }
+
+    await followUser.save();
+
+    const message = hasFollow
+      ? "User unfollowed successfully"
+      : "User followed successfully";
+
+    res.status(200).json({
+      success: true,
+      message: message,
+      data: followUser,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error following/unfollowing user",
+      error: error.message,
+    });
+  }
+};
