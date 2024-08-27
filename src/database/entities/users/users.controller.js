@@ -152,26 +152,35 @@ export const followUserById = async (req, res) => {
     const ownUserId = req.tokenData.id;
     const userIdToFollow = req.params.id;
 
-    const followUser = await User.findById(userIdToFollow);
+    const ownUser = await User.findById(ownUserId);
 
-    if (!followUser) {
+    if (!ownUser) {
       return res.status(404).json({
         success: false,
         message: "User not found",
       });
     }
 
-    const hasFollow = followUser.following.includes(ownUserId);
+    const followUser = await User.findById(userIdToFollow);
 
-    if (hasFollow) {
-      followUser.following.pull(userIdToFollow);
-    } else {
-      followUser.following.push(userIdToFollow);
+    if (!followUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User to follow not found",
+      });
     }
 
-    await followUser.save();
+    const isFollowing = ownUser.following.includes(userIdToFollow);
 
-    const message = hasFollow
+    if (isFollowing) {
+      ownUser.following.pull(userIdToFollow);
+    } else {
+      ownUser.following.push(userIdToFollow);
+    }
+
+    await ownUser.save();
+
+    const message = isFollowing
       ? "User unfollowed successfully"
       : "User followed successfully";
 
