@@ -83,6 +83,7 @@ export const login = async (req, res) => {
       {
         _id: user._id,
         role: user.role,
+        following: user.following,
       },
 
       process.env.JWT_SECRET,

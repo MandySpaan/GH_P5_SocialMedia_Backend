@@ -15,6 +15,7 @@ export const auth = (req, res, next) => {
     req.tokenData = {
       id: decoded._id,
       role: decoded.role,
+      following: decoded.following,
     };
 
     next();
