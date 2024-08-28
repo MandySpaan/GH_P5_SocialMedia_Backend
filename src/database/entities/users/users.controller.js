@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import User from "./user.model.js";
 import { Types } from "mongoose";
 
@@ -100,6 +101,27 @@ export const getUserProfileById = async (req, res) => {
   }
 };
 
+export const getFollowingProfiles = async (req, res) => {
+  try {
+    const userId = req.tokenData.id;
+    const followingProfiles = await User.findOne({ _id: userId }).select(
+      "following"
+    );
+
+    return res.status(201).json({
+      success: true,
+      message: "Following profiles retrieved successfully",
+      data: followingProfiles.following,
+    });
+  } catch (error) {
+    res.status(500).json({
+      susscess: false,
+      message: "Error trying to retrieve your profile",
+      error: error.message,
+    });
+  }
+};
+
 export const updateUser = async (req, res) => {
   try {
     const userIdToUpdate = req.tokenData.id;
@@ -180,6 +202,16 @@ export const followUserById = async (req, res) => {
 
     await ownUser.save();
 
+    const newToken = jwt.sign(
+      {
+        _id: ownUser._id,
+        role: ownUser.role,
+        following: ownUser.following,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "2h" }
+    );
+
     const message = isFollowing
       ? "User unfollowed successfully"
       : "User followed successfully";
@@ -188,6 +220,7 @@ export const followUserById = async (req, res) => {
       success: true,
       message: message,
       data: followUser,
+      token: newToken,
     });
   } catch (error) {
     res.status(500).json({
