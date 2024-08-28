@@ -104,19 +104,31 @@ export const getUserProfileById = async (req, res) => {
 export const getFollowingProfiles = async (req, res) => {
   try {
     const userId = req.tokenData.id;
-    const followingProfiles = await User.findOne({ _id: userId }).select(
-      "following"
-    );
 
-    return res.status(201).json({
+    const user = await User.findOne({ _id: userId }).select("following");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const followingIds = user.following;
+
+    const followingProfiles = await User.find({ _id: { $in: followingIds } })
+      .select("username first_name last_name description")
+      .lean();
+
+    return res.status(200).json({
       success: true,
       message: "Following profiles retrieved successfully",
-      data: followingProfiles.following,
+      data: followingProfiles,
     });
   } catch (error) {
     res.status(500).json({
-      susscess: false,
-      message: "Error trying to retrieve your profile",
+      success: false,
+      message: "Error trying to retrieve following profiles",
       error: error.message,
     });
   }
