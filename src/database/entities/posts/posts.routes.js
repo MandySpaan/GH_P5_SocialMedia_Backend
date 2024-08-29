@@ -5,6 +5,7 @@ import {
   deletePostById,
   deletePostByIdAdmin,
   getAllPosts,
+  getFollowingPosts,
   getOwnPosts,
   getPostById,
   getPostsByUserId,
@@ -23,6 +24,7 @@ router.put("/:id", auth, updatePostById);
 router.get("/own", auth, getOwnPosts);
 router.get("/", getAllPosts);
 router.get("/user/:id", getPostsByUserId);
+router.get("/following", auth, getFollowingPosts);
 router.get("/:id", getPostById);
 
 export { router };

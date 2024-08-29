@@ -261,6 +261,39 @@ export const getPostsByUserId = async (req, res) => {
   }
 };
 
+export const getFollowingPosts = async (req, res) => {
+  try {
+    const userId = req.tokenData.id;
+
+    const user = await User.findOne({ _id: userId }).select("following");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const followingIds = user.following;
+
+    const followingPosts = await Post.find({ user_id: { $in: followingIds } })
+      .select("title description")
+      .lean();
+
+    return res.status(200).json({
+      success: true,
+      message: "Following profiles retrieved successfully",
+      data: followingPosts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error trying to retrieve following profiles",
+      error: error.message,
+    });
+  }
+};
+
 export const likePostById = async (req, res) => {
   try {
     const userId = req.tokenData.id;
