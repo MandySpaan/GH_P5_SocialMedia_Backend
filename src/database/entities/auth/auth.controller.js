@@ -51,23 +51,23 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { identifier, password } = req.body;
 
-    if (!email || !password) {
+    if (!identifier || !password) {
       return res.status(400).json({
-        success: true,
-        message: "email and password are required",
+        success: false,
+        message: "Identifier (email or username) and password are required",
       });
     }
 
     const user = await User.findOne({
-      email: email,
+      $or: [{ email: identifier }, { username: identifier }],
     });
 
     if (!user) {
       return res.status(400).json({
         success: false,
-        message: "Unknown email address",
+        message: "Unknown email or username",
       });
     }
 
@@ -85,7 +85,6 @@ export const login = async (req, res) => {
         role: user.role,
         following: user.following,
       },
-
       process.env.JWT_SECRET,
       {
         expiresIn: "2h",
@@ -101,7 +100,7 @@ export const login = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error trying to log in",
-      error: error,
+      error: error.message,
     });
   }
 };
