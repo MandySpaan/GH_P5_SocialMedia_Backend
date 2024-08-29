@@ -277,7 +277,11 @@ export const getFollowingPosts = async (req, res) => {
     const followingIds = user.following;
 
     const followingPosts = await Post.find({ user_id: { $in: followingIds } })
-      .select("title description")
+      .select("user_id title description")
+      .populate({
+        path: "user_id",
+        select: "username",
+      })
       .lean();
 
     return res.status(200).json({
