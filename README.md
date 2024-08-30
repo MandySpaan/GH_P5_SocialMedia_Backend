@@ -13,9 +13,10 @@ This project was made as part of a course Full Stack Developer for GeeksHubs Aca
 
 ## Assignment 📝
 
-GeeksHub gave the assignment to develop the backend for a social media platform.
+GeeksHub gave the assignment to develop the backend for a social media platform. <br>
+A social media platform on which users can register, access the network, post and interact.
 
-**Backend for a social media platform**: A social media platform on which users can register, access the network, post and interact.
+You can find the related frontend project here: [GH_P7_SocialMedia_Frontend](https://github.com/MandySpaan/GH_P7_SocialMedia_Frontend)
 
 ## Stack 💻
 
@@ -56,13 +57,11 @@ GeeksHub gave the assignment to develop the backend for a social media platform.
 
 This diagram shows the structure of the database tables.
 
-![Database Diagram](./img/diagram-social-media.jpeg)
+![Database Diagram](./img/diagram-social-media.png)
 
 ## Local installation 🛠️
 
 ### Backend
-
-You can find the backend project here: [GH_P5_SocialMedia_Backend](https://github.com/MandySpaan/GH_P5_SocialMedia_Backend)
 
 1. Clone the repository
    `$ git clone https://github.com/MandySpaan/GH_P5_SocialMedia_Backend`
@@ -75,6 +74,8 @@ You can find the backend project here: [GH_P5_SocialMedia_Backend](https://githu
    `$ npm run dev`
 
 ### Frontend
+
+You can find the frontend project here: [GH_P7_SocialMedia_Frontend](https://github.com/MandySpaan/GH_P7_SocialMedia_Frontend)
 
 1. Clone the repository
    `$ git clone https://github.com/MandySpaan/GH_P7_SocialMedia_Frontend`
