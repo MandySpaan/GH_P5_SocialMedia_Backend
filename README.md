@@ -21,9 +21,6 @@ You can find the related frontend project here: [GH_P7_SocialMedia_Frontend](htt
 ## Stack 💻
 
 <div align="center">
-<a href="https://www.reactjs.com/">
-    <img src= "https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
-</a>
 <a href="https://developer.mozilla.org/es/docs/Web/JavaScript">
     <img src= "https://img.shields.io/badge/javascipt-EFD81D?style=for-the-badge&logo=javascript&logoColor=black"/>
 </a>
