@@ -61,7 +61,7 @@ This diagram shows the structure of the database tables.
 ### Backend
 
 1. Clone the repository
-   `$ git clone https://github.com/MandySpaan/GH_P5_SocialMedia_Backend`
+   `$ git clone https://github.com/MandySpaan/SocialMedia_Backend`
 2. Install dependencies
    `$ npm install --y`
 3. Copy the file .env.example, change the name to .env and fill in all the fields
@@ -75,7 +75,7 @@ This diagram shows the structure of the database tables.
 You can find the frontend project here: [SocialMedia_Frontend](https://github.com/MandySpaan/SocialMedia_Frontend)
 
 1. Clone the repository
-   `$ git clone https://github.com/MandySpaan/GH_P7_SocialMedia_Frontend`
+   `$ git clone https://github.com/MandySpaan/SocialMedia_Frontend`
 2. Install dependencies
    `$ npm install --y`
 3. Start the server
